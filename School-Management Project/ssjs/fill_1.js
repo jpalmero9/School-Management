@@ -75,7 +75,7 @@ messages	= [
 		type 	: 'confirm'
 	},
 	{
-		message : 'All changes have been saved',
+		message : 'All changes have been saved.',
 		key 	: 'changes_saved',
 		type 	: 'info'
 	}
@@ -97,14 +97,14 @@ util.save();
 
 ds.Log.clear();
 
-// Clear all data
+// Clear all the data
 for(var _i in ds.dataClasses){
     if(_i != 'Utils' && _i != 'Vacancy' && _i != 'Configuration'){
         ds[_i].remove();
     }
 }
 
-// Fill School:
+// Load school information
 ds.School.init();
 
 // Get the abscence status from the abscence_status file
@@ -117,7 +117,7 @@ while(!absStream.end()){
     }).save();
 }
 
-//Generate the studyGroups
+//Generate the grades
 for(var _i = 0 , sg ; sg = studyGroups[_i] ; _i++){
     var studyG = new ds.StudyGroup({
         name	: sg,
@@ -127,20 +127,20 @@ for(var _i = 0 , sg ; sg = studyGroups[_i] ; _i++){
     studyG.save();
 }
 
-// Generate the course
+// Generate the courses
 for(var _i = 0 , c ; c = courses[_i] ; _i++){
     var
     course = new ds.Course({
         name		: c,
-        description	: 'Description of the course : ' + c,
-        summary		: 'The summary of the course : ' + c,
+        description	: 'Description of the course: ' + c,
+        summary		: 'Brief summary of the course: ' + c,
         color 		: '#' + colors[_i%colors.length]
     });
 	
     course.save();
 }
 
-// Generate classrooms
+// Generate the classrooms
 for(var _i = 0 , cr ; cr = classrooms[_i] ; _i++){
 	new ds.Classroom({
         name	: cr,
@@ -148,7 +148,7 @@ for(var _i = 0 , cr ; cr = classrooms[_i] ; _i++){
     }).save();
 }
 
-// Generate messages
+// Generate the messages
 for(var _i = 0 , msg ; msg = messages[_i] ; _i++){
 	new ds.Message(msg).save();
 }
